@@ -3,9 +3,14 @@ const Project = require("../models/Project");
 // Получение всех проектов
 const getAllProjects = async (req, res) => {
   try {
+    console.log("✅ API /api/projects called");
+
     const projects = await Project.find();
+    console.log(`✅ Found ${projects.length} projects`, projects);
+
     res.status(200).json(projects);
   } catch (error) {
+    console.error("❌ Error fetching projects:", error);
     res.status(500).json({ error: "Server error" });
   }
 };

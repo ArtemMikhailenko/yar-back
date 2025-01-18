@@ -1,0 +1,68 @@
+# ❌ Игнорируем `.env` и другие конфиденциальные файлы
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ❌ Игнорируем зависимости (устанавливаются через `npm install`)
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# ❌ Логи и временные файлы
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
+*.bak 
+
+# ❌ Файлы кеша и сборки
+build/
+dist/
+out/
+.next/
+.cache/
+.vscode/
+.idea/
+*.log
+logs/
+
+# ❌ Git-метаданные (если не нужны)
+.git/
+.gitignore
+.gitkeep
+
+# ❌ Файлы IDE (VSCode, JetBrains, WebStorm и др.)
+.vscode/
+.idea/
+*.iml
+
+# ❌ Docker файлы (если используешь Docker)
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# ❌ Игнорируем uploads и временные файлы
+uploads/
+temp/
+tmp/
+
+# ❌ Игнорируем кэш файлов TypeScript и JS/TS билдов
+*.tsbuildinfo
+*.d.ts
+*.map
+
+# ❌ Игнорируем файлы тестов/покрытия
+coverage/
+jest/
+cypress/
+*.spec.js
+*.spec.ts
+*.test.js
+*.test.ts

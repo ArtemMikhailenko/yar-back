@@ -28,7 +28,7 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 const swaggerDocs = (app) => {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   console.log("Swagger Docs available at http://localhost:1024/api-docs");
 };
 
