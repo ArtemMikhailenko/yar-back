@@ -3,15 +3,24 @@ const Project = require("../models/Project");
 // Получение всех проектов
 const getAllProjects = async (req, res) => {
   try {
-    console.log("✅ API /api/projects called");
+    const { status } = req.query;
 
-    const projects = await Project.find();
-    console.log(`✅ Found ${projects.length} projects`, projects);
+    let query = {};
+    if (status) {
+      query.status = status;
+    }
 
-    res.status(200).json(projects);
+    const projects = await Project.find(query);
+
+    if (projects.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "Проекты с таким статусом не найдены" });
+    }
+
+    res.json(projects);
   } catch (error) {
-    console.error("❌ Error fetching projects:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ message: "Ошибка сервера", error });
   }
 };
 
@@ -28,7 +37,14 @@ const addProject = async (req, res) => {
       endDate,
       chain,
       logoUrl,
+      bannerUrl,
+      startDate,
+      targetRaise,
+      totalParticipants,
+      timeUntilStart,
       description,
+      status,
+      categories,
     } = req.body;
 
     const project = new Project({
@@ -41,7 +57,14 @@ const addProject = async (req, res) => {
       endDate,
       chain,
       logoUrl,
-      description, // Новое поле
+      bannerUrl,
+      startDate,
+      targetRaise,
+      totalParticipants,
+      timeUntilStart,
+      description,
+      status,
+      categories, // Новое поле
     });
 
     await project.save();

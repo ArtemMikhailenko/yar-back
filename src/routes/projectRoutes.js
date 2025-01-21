@@ -10,11 +10,20 @@ const router = express.Router();
  * @swagger
  * /api/projects:
  *   get:
- *     summary: Get all projects
+ *     summary: Get all projects with optional filtering by status
  *     tags: [Projects]
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter projects by status (e.g., "Upcoming", "Active", "Completed")
  *     responses:
  *       200:
- *         description: List of all projects
+ *         description: List of all projects (or filtered by status)
+ *       404:
+ *         description: No projects found with the specified status
  *       500:
  *         description: Server error
  */
@@ -52,9 +61,23 @@ router.get("/", getAllProjects);
  *                 type: string
  *               logoUrl:
  *                 type: string
+ *               bannerUrl:
+ *                 type: string
+ *               startDate:
+ *                 type: string
+ *               targetRaise:
+ *                 type: number
+ *               totalParticipants:
+ *                 type: number
+ *               timeUntilStart:
+ *                 type: string
  *               description:
  *                 type: string
  *                 description: Detailed description of the project
+ *               status:
+ *                 type: string
+ *               categories:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Project added successfully
