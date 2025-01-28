@@ -5,6 +5,8 @@ const {
   getUserByEmail,
   sendPhoneVerification,
   verifyPhone,
+  getUserBalance,
+  updateUserBalance,
 } = require("../controllers/authController");
 
 const router = express.Router();
@@ -140,6 +142,68 @@ router.get("/users", getAllUsers);
  *         description: Server error
  */
 router.get("/user/:email", getUserByEmail);
+/**
+ * @swagger
+ * /api/auth/user/{userId}/balance:
+ *   get:
+ *     summary: Get user balance
+ *     description: Retrieve the balance of a specific user in ETH, BTC, USDT, and ARK.
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: User ID
+ *     responses:
+ *       200:
+ *         description: User balance retrieved successfully
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
+router.get("/user/:userId/balance", getUserBalance);
+
+/**
+ * @swagger
+ * /api/auth/user/{userId}/balance:
+ *   put:
+ *     summary: Update user balance
+ *     description: Update the balance of a user for ETH, BTC, USDT, and ARK.
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: User ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ETH:
+ *                 type: number
+ *               BTC:
+ *                 type: number
+ *               USDT:
+ *                 type: number
+ *               ARK:
+ *                 type: number
+ *     responses:
+ *       200:
+ *         description: User balance updated successfully
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
+router.put("/user/:userId/balance", updateUserBalance);
 
 router.post("/send-phone-verification", sendPhoneVerification);
 

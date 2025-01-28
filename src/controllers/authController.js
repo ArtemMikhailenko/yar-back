@@ -126,6 +126,7 @@ const getUserByEmail = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
 const phoneVerificationCodes = new Map();
 
 const sendPhoneVerification = async (req, res) => {
@@ -175,6 +176,61 @@ const verifyPhone = async (req, res) => {
     res.status(500).json({ error: "Failed to verify phone number" });
   }
 };
+const getUserBalance = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Ищем пользователя по ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Отправляем баланс
+    res.status(200).json({
+      ETH: user.balance.ETH,
+      BTC: user.balance.BTC,
+      USDT: user.balance.USDT,
+      ARK: user.balance.ARK,
+    });
+  } catch (error) {
+    console.error("Error fetching user balance:", error);
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
+const updateUserBalance = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { ETH, BTC, USDT, ARK } = req.body; // Получаем баланс из тела запроса
+
+    // Найти пользователя
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "Пользователь не найден" });
+    }
+
+    // Обновляем только поле balance, НЕ затрагивая валидацию других полей
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        $set: {
+          "balance.ETH": ETH || user.balance.ETH,
+          "balance.BTC": BTC || user.balance.BTC,
+          "balance.USDT": USDT || user.balance.USDT,
+          "balance.ARK": ARK || user.balance.ARK,
+        },
+      },
+      { new: true, runValidators: false } // Отключаем валидацию
+    );
+
+    return res.status(200).json({ balance: updatedUser.balance });
+  } catch (error) {
+    console.error("Ошибка обновления баланса:", error);
+    res.status(500).json({ message: "Ошибка сервера" });
+  }
+};
 
 module.exports = {
   register,
@@ -183,4 +239,6 @@ module.exports = {
   getUserByEmail,
   sendPhoneVerification,
   verifyPhone,
+  getUserBalance,
+  updateUserBalance,
 };
