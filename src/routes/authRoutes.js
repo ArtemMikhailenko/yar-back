@@ -147,7 +147,7 @@ router.get("/user/:email", getUserByEmail);
  * /api/auth/user/{userId}/balance:
  *   get:
  *     summary: Get user balance
- *     description: Retrieve the balance of a specific user in ETH, BTC, USDT, and ARK.
+ *     description: Retrieve the balance of a specific user in ETH, BTC, USDT, and AVL.
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -171,7 +171,7 @@ router.get("/user/:userId/balance", getUserBalance);
  * /api/auth/user/{userId}/balance:
  *   put:
  *     summary: Update user balance
- *     description: Update the balance of a user for ETH, BTC, USDT, and ARK.
+ *     description: Update the balance of a user for ETH, BTC, USDT, and AVL.
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -193,7 +193,7 @@ router.get("/user/:userId/balance", getUserBalance);
  *                 type: number
  *               USDT:
  *                 type: number
- *               ARK:
+ *               AVL:
  *                 type: number
  *     responses:
  *       200:

@@ -191,7 +191,7 @@ const getUserBalance = async (req, res) => {
       ETH: user.balance.ETH,
       BTC: user.balance.BTC,
       USDT: user.balance.USDT,
-      ARK: user.balance.AVL,
+      AVL: user.balance.AVL,
     });
   } catch (error) {
     console.error("Error fetching user balance:", error);
