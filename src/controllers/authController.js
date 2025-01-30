@@ -191,7 +191,7 @@ const getUserBalance = async (req, res) => {
       ETH: user.balance.ETH,
       BTC: user.balance.BTC,
       USDT: user.balance.USDT,
-      ARK: user.balance.ARK,
+      ARK: user.balance.AVL,
     });
   } catch (error) {
     console.error("Error fetching user balance:", error);
@@ -202,7 +202,7 @@ const getUserBalance = async (req, res) => {
 const updateUserBalance = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { ETH, BTC, USDT, ARK } = req.body; // Получаем баланс из тела запроса
+    const { ETH, BTC, USDT, AVL } = req.body; // Получаем баланс из тела запроса
 
     // Найти пользователя
     const user = await User.findById(userId);
@@ -219,7 +219,7 @@ const updateUserBalance = async (req, res) => {
           "balance.ETH": ETH || user.balance.ETH,
           "balance.BTC": BTC || user.balance.BTC,
           "balance.USDT": USDT || user.balance.USDT,
-          "balance.ARK": ARK || user.balance.ARK,
+          "balance.AVL": AVL || user.balance.AVL,
         },
       },
       { new: true, runValidators: false } // Отключаем валидацию

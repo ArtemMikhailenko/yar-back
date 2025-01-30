@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     ETH: { type: Number, default: 0 },
     BTC: { type: Number, default: 0 },
     USDT: { type: Number, default: 0 },
-    ARK: { type: Number, default: 0 },
+    AVL: { type: Number, default: 0 },
   },
   createdAt: {
     type: Date,
