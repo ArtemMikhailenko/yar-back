@@ -10,7 +10,7 @@ async function updateUsers() {
     { balance: { $exists: false } },
     {
       $set: {
-        balance: { ETH: 0, BTC: 0, USDT: 0, ARK: 0 },
+        balance: { ETH: 0, BTC: 0, USDT: 0, AVL: 0 },
       },
     }
   );

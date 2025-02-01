@@ -29,7 +29,7 @@ app.use("/api/projects", projectRoutes);
 // Подключение Swagger
 swaggerDocs(app);
 // Запуск сервера
-const PORT = process.env.PORT || 1024;
+const PORT = 1024;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
